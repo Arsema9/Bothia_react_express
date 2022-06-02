@@ -4,7 +4,6 @@ import './Cards.css';
 import CardItem from './CardItem';
 /*body in homepage */
 function Cards() {
-   
    return (
       <div className='cards'>
          <h1>KATEGORIER</h1>
@@ -15,8 +14,7 @@ function Cards() {
                      src='images/inrikes/inrikes-kategori-bild.jpg'
                      text='Utforska Sverige'
                      label='Inrikes'
-                     path='/imageView'
-                                     
+                     path='/category'
                   />
                   <CardItem
                      src='images/utrikes/utrikes-kategori-bild.jpeg'

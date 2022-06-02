@@ -11,7 +11,7 @@ import SignUp from "./components/views/SignUp";
 import Loggedin from './components/views/Loggedin'; //page when logged in
 import Login from './components/views/Login'; //page when logged in
 //import { useLocation } from "react-router-dom"
-import { Routes, Route, Navigate, useLocation } from "react-router-dom"
+import { Routes, Route, Navigate, useLocation, Redirect } from "react-router-dom"
 //import IndexHeader from "./components/indexHeader"
 import Navbar from "./components/Navbar"
 import HeroSection from './components/HeroSection';
@@ -22,7 +22,30 @@ import Footer from './components/Footer';
 
   const[auth, setAuth] = useState(false);
   const location = useLocation();
+  //the state that will be holding your cart object for the entire app.
+  const [cart, setCart] = useState();
 
+  /**
+   * There is some logic to make sure the user selects a variant
+   *  (it's required to select a variant in order to add it to the cart). 
+   * Note that the quantity has been hard-code to 1 because the cart page 
+   * is where a customer can change the quantity. Lastly, upon a successful 
+   * response you'll want to add the cart object to the global cart state.
+   * @param {*} productId 
+   * @param {*} variantInfo 
+ 
+    const addToCart = (productId, variantInfo) => {
+
+      if (variantInfo) {
+        commerce.cart.add(productId, 1, variantInfo)
+          .then(res => {
+            setCart(res.cart)
+          })
+      } else {
+        window.alert('Please Select a Shirt Size')
+      }
+    }
+  */
   return (
     <div className="App">
       <header>
@@ -31,21 +54,23 @@ import Footer from './components/Footer';
       </header>
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route exact path="/basket" element={<Basket />} />
+        <Route exact path="/basket" element={<Basket setAuth={setAuth}/>} />
         <Route exact path="/imageView" element={<ImageView />} />
         <Route exact path="/tips" element={<Tips />} />
         <Route exact path="/edit" element={<Edit />} />
         <Route exact path="/results" element={<Results />} />
         <Route exact path="/upload" element={<Upload />} />
         <Route path="/login" element={<Login setAuth={setAuth} />} />
-        <Route exact path="/signup" element={<SignUp setAuth={setAuth} />} />
+       <Route path="/Loggedin" element={<Loggedin setAuth={setAuth} />} />
+        <Route path="/signup" element={<SignUp setAuth={setAuth} />} />
         <Route
-          path="/"
+         exact path="/"
           element={
             auth ? (
-              <Loggedin setAuth={setAuth} />
+              <Home setAuth={setAuth} />
+            
             ) : (
-              <Navigate to="/login" state={{ from: location }} replace />
+                <Navigate to="/login" state={{ from: location }} replace />
             )
           }
         />
@@ -88,10 +113,6 @@ export default App
           </>
        
     );
-  }
-  
-      
+  }   
  export default App;
- */
-
-        
+ */     

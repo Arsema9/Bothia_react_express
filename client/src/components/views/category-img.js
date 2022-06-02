@@ -53,4 +53,4 @@ class Category extends Component {
       )
    }
 }
-export default Results
+export default Category

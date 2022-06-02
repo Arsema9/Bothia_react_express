@@ -3,9 +3,9 @@
 //import React, { Component } from "react"
 
 import React from 'react';
-//import '../../App1.css';
+import '../../App1.css';
 //import HeroSection from '../HeroSection';
-import '../Cards.css';
+//import '../Cards.css';
 
 export default function Tips(){ 
   return (

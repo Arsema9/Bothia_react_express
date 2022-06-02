@@ -33,6 +33,11 @@ function Navbar() {
                <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
                   BB <i className='fab fa-typo3' />
             </Link>
+          
+              {/*    <a href="/basket"><i className="fa fa-cart-plus fa_custom fa-2x" /></a>*/}
+                 
+                 
+           
                <div className="menu-icon" onClick={handleClick}>
             {/*here we set hamburger menu 
             if its clicked*/}
@@ -44,6 +49,7 @@ function Navbar() {
                         HOME
                      </Link>
                   </li>
+               
                   <li className='nav-item'>
                      <Link
                         to='/basket'
@@ -71,17 +77,6 @@ function Navbar() {
                         IMAGEVIEW
                      </Link>
                   </li>
-{/*RADERA DETTA 
-                  <li className='nav-item'>
-                     <Link
-                        to='/menu'
-                        className='nav-links'
-                        onClick={closeMobileMenu}
-                     >
-                        MENU
-                     </Link>
-                  </li>
-         */}
 
                   <li className='nav-item'>
                      <Link
@@ -111,6 +106,15 @@ function Navbar() {
                      >
                         UPLOAD
                      </Link>
+                  </li>
+                     <li className='nav-item'>
+                        <Link
+                           to='/Loggedin'
+                           className='nav-links'
+                           onClick={closeMobileMenu}
+                        >
+                           logged in
+                        </Link>
                   </li>
 
                   <li>

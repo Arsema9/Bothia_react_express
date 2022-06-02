@@ -147,7 +147,7 @@ const LoginForm = ({ setAuth }) => {
                         to="#"
                         underline="hover"
                      >
-                        Forgot password?
+                        Glömt lösenordet?
                      </Link>
                   </Stack>
 

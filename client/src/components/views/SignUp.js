@@ -9,7 +9,7 @@ import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 import SocialAuth from '../SocialAuth';
 
-//import '../Cards.css';
+import '../Cards.css';
 
    const RootStyle = styled("div")({
    background: "rgb(249, 250, 251)",
@@ -61,7 +61,7 @@ import SocialAuth from '../SocialAuth';
                      <Logo />
 
                      <Typography sx={{ color: "text.secondary", mb: 5 }}>
-                        Enter your details below.
+                        Ange dina uppgifter nedan.
                      </Typography>
                   </HeadingStyle>
 
@@ -71,7 +71,7 @@ import SocialAuth from '../SocialAuth';
 
                   <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
                      <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                        OR
+                        ELLER
                      </Typography>
                   </Divider>
 
@@ -84,7 +84,7 @@ import SocialAuth from '../SocialAuth';
                      align="center"
                      sx={{ color: "text.secondary", mt: 2 }}
                   >
-                     By registering, I agree to{" "}
+                     Genom att registrera mig godkänner jag{" "}
                      <Link underline="always" color="text.primary" href="#">
                         Terms of Service
                      </Link>{" "}
@@ -102,9 +102,9 @@ import SocialAuth from '../SocialAuth';
                      align="center"
                      sx={{ mt: 3 }}
                   >
-                     Have an account?{" "}
+                     Har du redan ett konto?{" "}
                      <Link variant="subtitle2" component={RouterLink} to="/login">
-                        Login
+                        Logga in
                      </Link>
                   </Typography>
                </ContentStyle>

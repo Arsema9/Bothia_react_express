@@ -1,7 +1,28 @@
 import React, { Fragment, Component} from "react";
 import axios from "axios"
 import '../../App1.css';
+//import '../Button.css'
+import {
+  Stack,
+  InputLabel,
+  Select,
+  MenuItem,
+  Box,
+  TextField,
+  IconButton,
+  InputAdornment,
+  Checkbox,
+  FormControlLabel,
+  Button,
+} from "@mui/material";
 
+
+//import { Icon } from "@iconify/react";
+//import { LoadingButton, MobileDatePicker }  from '@mui/lab';
+//import { SaveIcon } from '@mui/icons-material';
+import { motion } from "framer-motion";
+//import { Button } from '../Button';
+//import '../Cards.css';
 class Edit extends Component {
   constructor() {
     super()
@@ -30,9 +51,11 @@ class Edit extends Component {
     this.onChangeExternalCount = this.onChangeExternalCount.bind(this)
     this.onChangeDatePublish = this.onChangeDatePublish.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+
   }
 
   async componentDidMount() {
+
     //Sets the filename based off of the route
     var editString = window.location.href
     editString = editString.substring(editString.indexOf("?") + 1)
@@ -71,7 +94,7 @@ class Edit extends Component {
   // Submits the finalized changes to backend
   async onSubmit(e) {
     e.preventDefault()
-
+    
     var newEdit = {
       filename: this.state.filename,
       newFilename: this.state.newFilename,
@@ -173,8 +196,26 @@ class Edit extends Component {
   }
 
   render() {
+    let easing = [0.6, -0.05, 0.01, 0.99];
+
+    const animate = {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: easing,
+        delay: 0.16,
+      },
+    };
+
+    {/*const [value, setValue] = React.useState < Date | null > (new Date());*/}
     return (
+
       <Fragment>
+        <div className='cards'>
+          <div className='cards__container'>
+            <div className='cards__wrapper'>
+              <div className='cards__items'>
         <label htmlFor="image"> Filnamn: {this.state.filename} </label>
         <img
           id="image"
@@ -182,7 +223,170 @@ class Edit extends Component {
           src={`${this.state.serverURL}/image/${this.state.filename}`}
           alt=""
         />
+
+                {/*https://mui.com/material-ui/react-checkbox/#main-content*/}   
         <form onSubmit={this.onSubmit}>
+           
+            <Stack spacing={3}>
+              <Stack
+                component={motion.div}
+                initial={{ opacity: 0, y: 60 }}
+                animate={animate}
+                direction={{ xs: "column", sm: "row" }}
+                spacing={2}
+              >
+                  <TextField
+                    fullWidth
+                    label="Titel"
+                    id="title"
+                    defaultValue={this.state.title}
+                    onChange={this.onChangeTitle}
+                  />
+
+                  <TextField
+                    fullWidth
+                      label="Beskrivning"
+                      htmlFor="description"
+                      id="description"
+                      defaultValue={this.state.description}
+                      onChange={this.onChangeDescription}
+                  />
+                </Stack>
+
+                  <Stack  
+                    component={motion.div}
+                    initial={{ opacity: 0, y: 60 }}
+                    animate={animate}
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={2}
+                  >
+                    <TextField
+                        fullWidth
+                      label="Fotograf"
+                        htmlFor="author"
+                        id="author"
+                        defaultValue={this.state.author}
+                        onChange={this.onChangeTitle}
+                    />
+                      <InputLabel id="category" htmlFor="category">Kategori</InputLabel>
+                      <Select labelId="category" id="select" value="kategori" onChange={this.onChangeCategory} fullWidth>
+                        <MenuItem value={this.state.category}>{this.state.category}</MenuItem>
+                        <MenuItem value="Inrikes"> Inrikes</MenuItem>
+                        <MenuItem value="Utrikes"> Utrikes</MenuItem>
+                        <MenuItem value="Nöje"> Nöje </MenuItem>
+                        <MenuItem value="Sport"> Sport</MenuItem>
+                        <MenuItem value="Kultur"> Kultur</MenuItem>
+                        <MenuItem value="Ekonomi"> Ekonomi</MenuItem>
+                      </Select>
+              
+              </Stack>
+                    <Stack component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+
+                    <TextField
+                      fullWidth
+                        label= "Taggar eller sökord, separera med komma-tecken"
+                        htmlFor="tags"
+                        id="tags"
+                        defaultValue={this.state.tags}
+                        onChange={this.onChangeTags}
+
+                    />
+                    {/*
+                      <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        
+                          <MobileDatePicker
+                          label="datePublish"
+                            value={value}
+                            onChange={(newValue) => {
+                              setValue(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                          />
+                      </LocalizationProvider>*/}
+
+                      <TextField
+                        fullWidth
+                        htmlFor="datePublish"
+                        type="date"
+                        id="datePublish"
+                        defaultValue={this.state.datePublish}
+                        onChange={this.onChangeDatePublish}
+
+                      />
+                    
+                       </Stack>
+                        <Stack component={motion.div}
+                          initial={{ opacity: 0, y: 60 }}
+                          animate={animate}
+                          direction={{ xs: "column", sm: "row" }}
+                          spacing={2}
+                          >
+                         
+                      <TextField
+                        fullWidth
+                        label="Pris"
+                        htmlFor="price"
+                        id="price"
+                        defaultValue={this.state.price}
+                        onChange={this.onChangePrice}
+                      />
+                   
+
+                      
+                      <TextField
+                        fullWidth
+                        label="Antal tillåtna nedladdningar"
+                        htmlFor="externalCount"
+                        id="externalCount"
+                        defaultValue={this.state.externalCount}
+                        onChange={this.onChangeExternalCount}
+
+                      />
+                      <FormControlLabel control={
+                        <Checkbox color="success"
+                          id="externalImage"
+                          name="yes"
+                          onChange={this.onChangeExternalImage}
+                        />} label="Är bilden extern"
+                      />
+                      
+                  </Stack>
+                    <Box>
+                     
+                    <Button
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                    
+             
+                    >
+                      SPARA REDIGERING
+                    </Button>
+                    </Box>
+                </Stack>
+
+
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </Fragment>
+    )
+  }
+}
+export default Edit
+
+                {/*
           <div>
             <div>
               <label htmlFor="title"> Titel: </label>
@@ -289,21 +493,57 @@ class Edit extends Component {
               onChange={this.onChangeExternalCount}
             />
           </div>
+          <div className='hero-btns'>
+            <Button
+              className='btns'
+              buttonStyle='btn--primary'
+              buttonSize='btn--large'
+            >
+              Spara Redigering
+            </Button>
+          </div>
+
+          <div id="edit-button">
+            <Button
+              className='btns'
+              buttonStyle='edit-button'
+              buttonSize='btn--large'
+            >
+              Spara Redigering
+            </Button>
+          </div>
+          {/*
+          <div className='hero-btns'>
+            <Button
+              className='btns'
+              buttonStyle='btn--outline'
+              buttonSize='btn--large'
+            >
+              Spara Redigering
+            </Button>
+
+          </div>
 
           <input
             type="submit"
             value="Spara redigering"
             className="btn btn-primary btn-block mt-4"
           />
+  
+    
         </form>
+        </div>
+        </div>
+          </div>
+        </div>
+        
       </Fragment>
     )
   }
 }
+/*}
 
-export default Edit
-
-/*
+{/*
 function Edit() {
   const [filename, setFilename] = setState(" ")
 
@@ -368,4 +608,4 @@ function Edit() {
   )
 }
 export default Edit
-*/
+*/}

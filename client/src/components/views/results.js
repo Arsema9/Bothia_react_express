@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
+
+import '../../App1.css';
 {/*sökvy */}
 class Results extends Component {
   constructor() {

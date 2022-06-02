@@ -39,12 +39,13 @@ const Loggedin = ({ setAuth }) => {
             }}
             gutterBottom
          >
-            Welcome Back
+            Välkommen tillbaka
          </Typography>
 
          <Button size="large" variant="contained" onClick={() => setAuth(false)}>
-            Log out
+            Logga Ut.
          </Button>
+        
       </Container>
    );
 };

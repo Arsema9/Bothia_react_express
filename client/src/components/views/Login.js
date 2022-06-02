@@ -63,7 +63,8 @@ const Login = ({ setAuth }) => {
                <HeadingStyle component={motion.div} {...fadeInUp}>
                   <Logo />
                   <Typography sx={{ color: "text.secondary", mb: 5 }}>
-                     Login to your account
+                     Logga in på ditt konto.
+
                   </Typography>
                </HeadingStyle>
 
@@ -73,7 +74,7 @@ const Login = ({ setAuth }) => {
 
                <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                     OR
+                     ELLER
                   </Typography>
                </Divider>
 
@@ -86,9 +87,9 @@ const Login = ({ setAuth }) => {
                   align="center"
                   sx={{ mt: 3 }}
                >
-                  Don’t have an account?{" "}
+                  Har inget konto?{" "}
                   <Link variant="subtitle2" component={RouterLink} to="/signup">
-                     Sign up
+                     Bli Medlem
                   </Link>
                </Typography>
             </ContentStyle>
