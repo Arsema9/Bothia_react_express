@@ -37,7 +37,7 @@ const Upload = () => {
     setFilename(e.target.files[0].name)
   }
 
- 
+
   // Uploads image to tmp, for exif extraction
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -134,112 +134,22 @@ const Upload = () => {
   const x = divcontainer
 
   const abc = React.useRef(null)
-  const handleClick = event =>{
+  const handleClick = event => {
     abc.current.click()
   }
 
   return (
     <Fragment>
-      <Stack spacing={3}>
-            <form onSubmit={onSubmit}>
-        
+      <div className='cards'>
+        <div className='cards__container'>
+          <div className='cards__wrapper'>
+            <div className='cards__items'>
+              <form onSubmit={onSubmit}>
 
-              {!x && (
-            
-                    <div className="custom-file mb-4">
-            
-                    <Stack
-                      component={motion.div}
-                      initial={{ opacity: 0, y: 60 }}
-                      animate={animate}
-                      direction={{ xs: "column", sm: "row" }}
-                      spacing={2}
-                    >     
-               
-                  <Button onClick={handleClick}
-                    fullWidth
-                    size="large"
-                    variant="contained"
-                  >
-                    <input ref={abc}
-                      style={{display:"none"}}
-                      type="file"
-                 
-                      id="customFile"
-                    
-                  onChange={onChange}
-                    />VÄLJ FIL
-                    </Button>
-                    <div>
-                  <InputLabel className="custom-file-label"
-                    fullWidth
-                    size="large"
-                    variant="contained"
-                  >
+                <Stack spacing={3}>
 
-                  {filename}
-                  </InputLabel>
-                  </div>
-              </Stack>
-                   
-                    </div>
-                     
-  
-        )}
-        {!x && (
-                
-            <InputLabel className="custom-file-label"
-              fullWidth
-              size="large"
-        
-            >
-              <input 
-                
-                type="submit"
-                id="customFile"
-                />
-              LADDA UPP FIL
-            </InputLabel>
-     
-        )}
-             
-        {uploadedFile ? (
-                      <Stack component={motion.div}
-                        initial={{ opacity: 0, y: 60 }}
-                        animate={animate}
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={2}
-                    >
-              <div className="row mt-5">
-                <div className="col-md-6 m-auto">
-              <h3 className="text-center">{uploadedFile.fileName}</h3>
-             
-              <img
-                      style={{ width: "100%" }}
-                //src={uploadedFile.filePath}
-                src= "/images/img-1.jpg"
-                alt=""
-              />
-                  </div>
-                </div>
-          
-                  </Stack>
-                    
-                
-        ) : null}
-       
-   
-      </form>
-    </Stack>
-        
+                  {!x && (
 
-      {x && (
-       
-               
-        <form onSubmit={onUpload}>
-         
-          <Stack spacing={3}>
-                  
                     <Stack
                       component={motion.div}
                       initial={{ opacity: 0, y: 60 }}
@@ -248,16 +158,128 @@ const Upload = () => {
                       spacing={2}
                     >
 
-              <img
-                style={{ width: "100%" }}
-                src={uploadedFile.filePath}
-                alt=""
-              />
+                      <Button onClick={handleClick}
+                        fullWidth
+                        size="large"
+                        variant="contained"
+                      >
+                        <input ref={abc}
+                          style={{ display: "none" }}
+                          type="file"
+                          id="customFile"
+                          onChange={onChange}
+                        />
+                        VÄLJ FIL
+                      </Button>
+
+                      <div>
+                        <InputLabel className="custom-file-label"
+                          fullWidth
+                          size="large"
+                          variant="contained"
+                        >
+                          {filename}
+                        </InputLabel>
+                      </div>
+                    </Stack>
+
+
+                  )}
+                  {!x && (
+                    <Stack
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+
+                      <InputLabel className="custom-file-label"
+                        fullWidth
+                        size="large"
+                        variant="contained"
+
+                      >
+                        <Button 
+                          fullWidth
+                          size="large"
+                           type="submit"
+                          variant="contained"
+                          id="customFile"
+                        >
+                    
+                          LADDA UPP FIL
+                        </Button>
+
+
+                      </InputLabel>
+                    </Stack>
+
+                  )}
+
+                  {uploadedFile ? (
+                    <Stack component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+
+                      <h3 className="text-center">{uploadedFile.fileName}</h3>
+
+                      <img
+                        tyle={{ width: "100%" }}
+                        src={uploadedFile.filePath}
+                        // src= "/images/img-1.jpg"
+                        alt=""
+                      />
+
+
+                    </Stack>
+
+
+                  ) : null}
+
+                </Stack>
+              </form>
+
+
+
+
+              {x && (
+
+
+                <form onSubmit={onUpload}>
+
+                  <Stack spacing={3}>
+
+                    <Stack
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+
+                      <img
+                        style={{ width: "100%" }}
+                        src="/images/img-1.jpg" //{uploadedFile.filePath}
+                        alt=""
+                      />
+                    </Stack>
+                    <Stack
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+
                       <TextField
                         fullWidth
                         label="Titel"
                         id="title"
-                        
+
                       />
 
                       <TextField
@@ -265,7 +287,7 @@ const Upload = () => {
                         label="Beskrivning"
                         htmlFor="description"
                         id="description"
-                       
+
                       />
                     </Stack>
                     <Stack
@@ -280,7 +302,7 @@ const Upload = () => {
                         label="Fotograf"
                         htmlFor="author"
                         id="author"
-                       
+
                       />
                       <InputLabel id="category" htmlFor="category">Kategori</InputLabel>
 
@@ -290,7 +312,7 @@ const Upload = () => {
                         <MenuItem value="Nöje"> Nöje </MenuItem>
                         <MenuItem value="Sport"> Sport</MenuItem>
                         <MenuItem value="Kultur"> Kultur</MenuItem>
-                      <MenuItem value="Natur"> Natur</MenuItem>
+                        <MenuItem value="Natur"> Natur</MenuItem>
 
                         <MenuItem value="Ekonomi"> Ekonomi</MenuItem>
                       </Select>
@@ -320,7 +342,7 @@ const Upload = () => {
                         id="price"
 
                       />
-                      </Stack>
+                    </Stack>
                     <Stack component={motion.div}
                       initial={{ opacity: 0, y: 60 }}
                       animate={animate}
@@ -349,44 +371,27 @@ const Upload = () => {
                         id="externalCount"
                       />
                     </Stack>
-                 
-                  <Box>
 
-                    <Button
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
+                    <Box>
+
+                      <Button onClick={onUpload}
+                        fullWidth
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                      >
+                        Final submit
+                      </Button>
+                    </Box>
+                  </Stack>
 
 
-                    >
-                      Final submit
-                    </Button>
-                  </Box>  
-          </Stack>
-
-     
-        </form>
-              
-     
-      )}
-   {/*   {x && (
-          
-                <Stack component={motion.div}
-                  initial={{ opacity: 0, y: 60 }}
-                  animate={animate}
-                  direction={{ xs: "column", sm: "row" }}
-                  spacing={2}
-                >
-               
-                  Automatisk metadata
-                  <pre>{JSON.stringify(exifdata, null, 2)}</pre>
-          </Stack>
-                  
-     
-      )}
-   */}
-         
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </Fragment>
   )
 }
