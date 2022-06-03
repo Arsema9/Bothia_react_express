@@ -1,30 +1,35 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
+import '../../App1.css';
+import {
+  Stack,
+  InputLabel,
+  Select,
+  MenuItem,
+  Box,
+  TextField,
+  IconButton,
+  InputAdornment,
+  Checkbox,
+  FormControlLabel,
+  Button,
+} from "@mui/material";
+import { motion } from "framer-motion";
+
+
 //import * as ReactDOM from 'react-dom/client'
 //import { NotificationContainer, NotificationManager } from "react-notifications"
 
 const Upload = () => {
   const [file, setFile] = useState("")
-  const [filename, setFilename] = useState("Choose File")
+  const [filename, setFilename] = useState("")
   const [uploadedFile, setUploadedFile] = useState({})
   const [divcontainer, setDivcontainer] = useState(false)
-  const [divcontainer2, setDivcontainer2] = useState(false) //broken
+  //const [divcontainer2, setDivcontainer2] = useState(false) //broken
   const [exifdata, setExifdata] = useState({})
 
   const serverURL = "localhost:5000" //localhost for use without external address
 
-  // For manual metadata, ideal solution but making it functional is not a priority
-  /*
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [author, setAuthor] = useState("")
-  const [tags, setTags] = useState("")
-  const [price, setPrice] = useState("")
-  const [externalImage, setExternalImage] = useState(false)
-  const [externalCount, setExternalCount] = useState("")
-  const [ifTip, setIfTip] = useState(false)
-  const [datePublish, setDatePublish] = useState("")
-  */
 
   //Displays currently sellected file
   const onChange = (e) => {
@@ -32,11 +37,7 @@ const Upload = () => {
     setFilename(e.target.files[0].name)
   }
 
-  //disabled as it's broken
-  function externalVisibility(e) {
-    setDivcontainer2(!divcontainer2)
-  }
-
+ 
   // Uploads image to tmp, for exif extraction
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -52,11 +53,9 @@ const Upload = () => {
       },
     })
 
-    const { fileName, filePath, exifdata } = res.data
+    const { fileName, filePath } = res.data
 
-    setExifdata(exifdata)
-
-    //console.log(exifdata)
+    console.log(fileName)
 
     setUploadedFile({ fileName, filePath })
   }
@@ -121,113 +120,273 @@ const Upload = () => {
 
     alert("Bilden har laddats upp!")
   }
+  let easing = [0.6, -0.05, 0.01, 0.99];
 
+  const animate = {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+      delay: 0.16,
+    },
+  };
   const x = divcontainer
+
+  const abc = React.useRef(null)
+  const handleClick = event =>{
+    abc.current.click()
+  }
 
   return (
     <Fragment>
-      <form onSubmit={onSubmit}>
-        {!x && (
-          <div className="custom-file mb-4">
-            <input
-              type="file"
-              className="custom-file-input"
-              id="customFile"
-              onChange={onChange}
-            />
-            <label className="custom-file-label" htmlFor="customFile">
-              {filename}
-            </label>
-          </div>
+      <Stack spacing={3}>
+            <form onSubmit={onSubmit}>
+        
+
+              {!x && (
+            
+                    <div className="custom-file mb-4">
+            
+                    <Stack
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >     
+               
+                  <Button onClick={handleClick}
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                  >
+                    <input ref={abc}
+                      style={{display:"none"}}
+                      type="file"
+                 
+                      id="customFile"
+                    
+                  onChange={onChange}
+                    />VÄLJ FIL
+                    </Button>
+                    <div>
+                  <InputLabel className="custom-file-label"
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                  >
+
+                  {filename}
+                  </InputLabel>
+                  </div>
+              </Stack>
+                   
+                    </div>
+                     
+  
         )}
         {!x && (
-          <input
-            type="submit"
-            value="Upload"
-            className="btn btn-primary btn-block mt-4"
-          />
+                
+            <InputLabel className="custom-file-label"
+              fullWidth
+              size="large"
+        
+            >
+              <input 
+                
+                type="submit"
+                id="customFile"
+                />
+              LADDA UPP FIL
+            </InputLabel>
+     
         )}
+             
         {uploadedFile ? (
-          <div className="row mt-5">
-            <div className="col-md-6 m-auto">
+                      <Stack component={motion.div}
+                        initial={{ opacity: 0, y: 60 }}
+                        animate={animate}
+                        direction={{ xs: "column", sm: "row" }}
+                        spacing={2}
+                    >
+              <div className="row mt-5">
+                <div className="col-md-6 m-auto">
               <h3 className="text-center">{uploadedFile.fileName}</h3>
+             
+              <img
+                      style={{ width: "100%" }}
+                //src={uploadedFile.filePath}
+                src= "/images/img-1.jpg"
+                alt=""
+              />
+                  </div>
+                </div>
+          
+                  </Stack>
+                    
+                
+        ) : null}
+       
+   
+      </form>
+    </Stack>
+        
+
+      {x && (
+       
+               
+        <form onSubmit={onUpload}>
+         
+          <Stack spacing={3}>
+                  
+                    <Stack
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+
               <img
                 style={{ width: "100%" }}
                 src={uploadedFile.filePath}
                 alt=""
               />
-            </div>
-          </div>
-        ) : null}
-      </form>
+                      <TextField
+                        fullWidth
+                        label="Titel"
+                        id="title"
+                        
+                      />
 
-      {x && (
-        <form onSubmit={onUpload}>
-          <div>
-            <input type="text" id="title" placeholder="Titel" />
-          </div>
-          <div>
-            <input type="text" id="description" placeholder="Beskrivning" />
-          </div>
-          <div>
-            <input type="text" id="author" placeholder="Fotograf" />
-          </div>
-          <div>
-            <select id="category">
-              <option value=""> Kategori </option>
-              <option value="Inrikes"> Inrikes </option>
-              <option value="Utrikes"> Utrikes </option>
-              <option value="Nöje"> Nöje </option>
-              <option value="Sport"> Sport </option>
-              <option value="Kultur"> Kultur </option>
-              <option value="Natur"> Natur </option>
-              <option value="Ekonomi"> Ekonomi </option>
-            </select>
-          </div>
-          <div>
-            <input
-              type="text"
-              id="tags"
-              placeholder="Taggar/sökord, separera med space"
-            />
-          </div>
-          <div>
-            <input type="number" id="price" placeholder="Pris" />
-          </div>
-          <div>
-            <input
-              type="date"
-              id="datePublish"
-              placeholder="Publiceringsdatum"
-            />
-          </div>
-          <div>
-            <label htmlFor="externalImage"> Är bilden extern? </label>
-            <input type="checkbox" id="externalImage" name="yes" />
-          </div>
+                      <TextField
+                        fullWidth
+                        label="Beskrivning"
+                        htmlFor="description"
+                        id="description"
+                       
+                      />
+                    </Stack>
+                    <Stack
+                      component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+                      <TextField
+                        fullWidth
+                        label="Fotograf"
+                        htmlFor="author"
+                        id="author"
+                       
+                      />
+                      <InputLabel id="category" htmlFor="category">Kategori</InputLabel>
 
-          <div>
-            <input
-              type="number"
-              id="externalCount"
-              placeholder="Antal gånger bilden får laddas ned"
-            />
-          </div>
+                      <Select labelId="category" id="category" value="kategori" fullWidth>
+                        <MenuItem value="Inrikes"> Inrikes</MenuItem>
+                        <MenuItem value="Utrikes"> Utrikes</MenuItem>
+                        <MenuItem value="Nöje"> Nöje </MenuItem>
+                        <MenuItem value="Sport"> Sport</MenuItem>
+                        <MenuItem value="Kultur"> Kultur</MenuItem>
+                      <MenuItem value="Natur"> Natur</MenuItem>
 
-          <input
-            type="submit"
-            value="Final submit"
-            className="btn btn-primary btn-block mt-4"
-          />
+                        <MenuItem value="Ekonomi"> Ekonomi</MenuItem>
+                      </Select>
+
+                    </Stack>
+
+                    <Stack component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+
+                      <TextField
+                        fullWidth
+                        label="Taggar eller sökord, separera med komma-tecken"
+                        htmlFor="tags"
+                        id="tags"
+
+                      />
+
+                      <TextField
+                        fullWidth
+                        label="Pris"
+                        type="number"
+                        htmlFor="price"
+                        id="price"
+
+                      />
+                      </Stack>
+                    <Stack component={motion.div}
+                      initial={{ opacity: 0, y: 60 }}
+                      animate={animate}
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                    >
+                      <TextField
+                        fullWidth
+                        htmlFor="datePublish"
+                        type="date"
+                        id="datePublish"
+                      />
+
+                      <FormControlLabel control={
+                        <Checkbox color="success"
+                          id="externalImage"
+                          name="yes"
+                        />} label="Är bilden extern?"
+                      />
+
+
+                      <TextField
+                        fullWidth
+                        label="Antal tillåtna nedladdningar"
+                        htmlFor="externalCount"
+                        id="externalCount"
+                      />
+                    </Stack>
+                 
+                  <Box>
+
+                    <Button
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+
+
+                    >
+                      Final submit
+                    </Button>
+                  </Box>  
+          </Stack>
+
+     
         </form>
+              
+     
       )}
-
-      {x && (
-        <div>
-          Automatisk metadata
-          <pre>{JSON.stringify(exifdata, null, 2)}</pre>
-        </div>
+   {/*   {x && (
+          
+                <Stack component={motion.div}
+                  initial={{ opacity: 0, y: 60 }}
+                  animate={animate}
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={2}
+                >
+               
+                  Automatisk metadata
+                  <pre>{JSON.stringify(exifdata, null, 2)}</pre>
+          </Stack>
+                  
+     
       )}
+   */}
+         
     </Fragment>
   )
 }

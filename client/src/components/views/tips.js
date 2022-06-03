@@ -6,6 +6,7 @@ import React from 'react';
 import '../../App1.css';
 //import HeroSection from '../HeroSection';
 //import '../Cards.css';
+import { Button, Typography, Container, Box } from "@mui/material";
 
 export default function Tips(){ 
   return (
@@ -24,7 +25,9 @@ export default function Tips(){
                   style={{ height: 200 + 'px' }}></textarea>
             </form>
               <div className='cards__item__info'>
-                
+                <Button size="large" variant="contained">
+                  Skicka
+                </Button>
               </div>
             </div>
         </div>

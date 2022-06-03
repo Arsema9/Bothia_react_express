@@ -352,7 +352,7 @@ class Edit extends Component {
                           id="externalImage"
                           name="yes"
                           onChange={this.onChangeExternalImage}
-                        />} label="Är bilden extern"
+                        />} label="Är bilden extern?"
                       />
                       
                   </Stack>

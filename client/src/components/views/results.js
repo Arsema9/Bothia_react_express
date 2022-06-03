@@ -11,7 +11,7 @@ class Results extends Component {
       searchWord: "",
       serverURL: "localhost:5000",
     }
-  }
+  }//få ut results - ska visa upp allt som man söker i sökfältet
 
   async componentDidMount() {
     //sets searchword
